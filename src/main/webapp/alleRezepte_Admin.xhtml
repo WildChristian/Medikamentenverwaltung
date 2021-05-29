@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel"> Medi Plattform</ui:insert>
+	</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<f:event listener="#{rezeptenHandler.init()}" type="preRenderView" />
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+		<h1>Rezeptenliste</h1>
+			<h:dataTable var="rezept" value="#{rezeptenHandler.rezept}"
+				rowClasses="odd,even" headerClass="header">
+				
+				<h:column>
+					<f:facet name="header">Rezeptnummer</f:facet>
+					<h:outputText value="#{rezept.rezeptNummer}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Anlagedatum</f:facet>
+					<h:outputText value="#{rezept.datum}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Medikament</f:facet>
+					<h:outputText value="#{rezept.medikament.medikamentenBezeichnung}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Kundennummer</f:facet>
+					<h:outputText value="#{rezept.kunde.anrede} " />
+					<h:outputText value="#{rezept.kunde.nachname} " />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Bearbeiten</f:facet>
+					<h:form>
+						<h:commandButton action="#{rezeptenHandler.edit()}"
+							value="Bearbeiten" />
+					</h:form>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Löschen</f:facet>
+					<h:form>
+						<h:commandButton action="#{rezeptenHandler.delete()}"
+							value="Löschen" />
+					</h:form>
+				</h:column>
+			</h:dataTable>
+			<h:form>
+				<h:commandButton action="#{rezeptenHandler.neueRezepte_admin()}"
+					value="Neues Rezept anlegen" />
+			</h:form>
+			<br></br>
+			
+
+		</ui:insert>
+	<h:link value="zurück" outcome="Dashboard_Admin" />
+	</div>
+	<div id="footer">
+		<ui:insert name="footer"></ui:insert>
+	</div>
+</h:body>
+</html>

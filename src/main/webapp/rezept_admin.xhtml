@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">
+Rezeptenverwaltung 1.0
+</ui:insert></title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+
+</h:head>
+
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h1>Rezeptenverwaltung</h1>
+
+			<h:form>
+				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+					<h:outputLabel value="Kunde:" for="kunde" />
+					<h:panelGroup>
+						<h:inputText id="kunde" value="#{rezeptenHandler.merkeKunde}"
+							required="true" requiredMessage="Eingabe fehlt" />
+						<h:message for="kunde" styleClass="message" />
+					</h:panelGroup>
+					<h:outputLabel value="Medikament:" for="medikamentinput" />
+					<h:panelGroup>
+						<h:inputText id="medikamentinput"
+							value="#{rezeptenHandler.merkeMedikament}" required="true"
+							requiredMessage="Eingabe fehlt" />
+						<h:message for="medikament" styleClass="message" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Arzt:" for="arzt" />
+					<h:panelGroup>
+						<h:outputLabel value="#{rezeptenHandler.merkeRezept.arzt.id}"
+							for="arzt" />
+					</h:panelGroup>
+					<h:commandButton
+						action="#{rezeptenHandler.koordinatorMethodeSpeichern_admin}"
+						value="Speichern" />
+				</h:panelGrid>
+			</h:form>
+			<h:outputText value="#{rezeptenHandler.message}" />
+			<br></br>
+			<h:link outcome="alleRezepte_Admin"> Zurück!</h:link>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+		</ui:insert>
+	</div>
+
+</h:body>
+</html>

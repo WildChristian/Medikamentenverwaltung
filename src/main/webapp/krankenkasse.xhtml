@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">
+Kundenverwaltung 1.0
+</ui:insert></title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:dataTable var="krankenkasse"
+				value="#{personHandler.merkePerson.krankenkasse}"
+				rowClasses="odd,even" headerClass="header">
+				<f:facet name="header">Kunden Krankenkassen</f:facet>
+				<h:column>
+					<f:facet name="header">Kartennummer</f:facet>
+					<h:outputText value="#{krankenkasse.kartennummer}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Krankenkassenname</f:facet>
+					<h:outputText value="#{krankenkasse.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Gultigbis</f:facet>
+					<h:outputText value="#{krankenkasse.gultigbis}" >
+					<f:convertDateTime pattern="dd.MM.yyyy" type="date" />
+						</h:outputText>
+				</h:column>
+			</h:dataTable>
+			<p>
+				<h:form>
+					<h:commandButton action="#{personHandler.neukrankenkasse()}" value="Krankenkasse anlegen" />
+				</h:form>
+			</p>
+
+
+
+			<h:form>
+				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+					<h:outputLabel value="Krankenkassenname:" for="name" />
+					<h:panelGroup>
+						<h:inputText id="name"
+							value="#{personHandler.merkeKrankenkasse.name}" />
+					</h:panelGroup>
+					<h:outputLabel value="Gultig-bis" for="gultisbis" />
+					<h:panelGroup>
+						<h:inputText id="gultisbis" value="#{personHandler.merkeKrankenkasse.gultigbis}" >
+						<f:convertDateTime pattern="dd.MM.yyyy" type="date" />
+						</h:inputText>
+					</h:panelGroup>
+					
+
+					<h:commandButton action="#{personHandler.speichernKrankenkasse()}"
+						value="speichern" />
+				</h:panelGrid>
+			</h:form>
+
+			<h:form>
+				<h:link outcome="alleKunden" value="Zurück" />
+			</h:form>
+		</ui:insert>
+	</div>
+
+	<div id="footer">
+		<ui:insert name="footer">
+		</ui:insert>
+	</div>
+</h:body>
+</html>
+

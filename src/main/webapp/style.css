@@ -1,0 +1,67 @@
+@charset "ISO-8859-1";
+body {
+width: 100%;
+border: 1px solid;
+
+font-family: Verdana, Arial, Helvetica, sans-serif;
+background-image: url("https://image.freepik.com/vektoren-kostenlos/online-apotheke-mit-online-konsultation-arzt_128772-630.jpg");
+}
+
+table {
+width: 100%;
+}
+th {
+background-color: #ccd2d3;
+padding: 5px 5px 5px 5px;
+border: 1px solid;
+}
+td {
+padding: 0px 5px 0px 5px;
+}
+footer {
+with: 100%;
+height: 100px;
+background-color: #00fbfb;
+border: 1px solid;
+padding: 30px;
+}
+tr.odd {
+background-color: #edf4f5;
+}
+tr.even {
+background-color: #dae0e1;
+}
+.message{
+    color:red;
+    font-size:14px;
+}
+
+button{
+margin: 10px;
+}
+h1{
+	text-align: center;
+	
+	background-color: #39B1EB;
+	font-family: Helvetica;
+	width: auto;
+	color: #edf4f5;
+	height: 50px;
+}
+form{
+	display: block;
+	width: 500px;
+}
+link{
+	text-decoration: none;
+	color: #edf4f5;
+	
+}
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: pink; 
+}

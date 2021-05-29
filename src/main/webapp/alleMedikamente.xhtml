@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel"> Medi Plattform</ui:insert></title>
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<f:event listener="#{medikamentHandler.init()}" type="preRenderView" />
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:dataTable var="medikament" value="#{medikamentHandler.medikament}"
+				rowClasses="odd,even" headerClass="header">
+				<f:facet name="header">Medikamente</f:facet>
+				<h:column>
+					<f:facet name="header">NR</f:facet>
+					<h:outputText value="#{medikament.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Medikament</f:facet>
+					<h:outputText value="#{medikament.medikamentenBezeichnung}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Preis</f:facet>
+					<h:outputText value="#{medikament.preis}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Menge</f:facet>
+					<h:outputText value="#{medikament.menge}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Rezeptpflichtig</f:facet>
+					<h:outputText value="#{medikament.rezeptPflichtig}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Bearbeiten</f:facet>
+					<h:form>
+						<h:commandButton action="#{medikamentHandler.edit()}"
+							value="Bearbeiten" />
+					</h:form>
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">Löschen</f:facet>
+					<h:form>
+
+						<h:commandButton action="#{medikamentHandler.delete()}"
+							value="Löschen" />
+					</h:form>
+				</h:column>
+			</h:dataTable>
+			<h:form>
+				<h:commandButton action="#{medikamentHandler.neu()}" value="Neu"
+					style="margin:10px;" />
+			</h:form>
+
+			<h:link value="zurück" outcome="Dashboard_Admin" />
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer"></ui:insert>
+	</div>
+</h:body>
+</html>

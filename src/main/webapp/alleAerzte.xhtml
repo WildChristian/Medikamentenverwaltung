@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">Medi plattform</ui:insert>
+	</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<f:event listener="#{kundenHandler.init()}" type="preRenderView" />
+	
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+		<h1>Aerztenliste </h1>
+			<h:dataTable var="arzt" value="#{aerzteHandler.arzt}"
+				rowClasses="odd,even" headerClass="header">
+				
+				<h:column>
+					<f:facet name="header">Arztnummer</f:facet>
+					<h:outputText value="#{arzt.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Praxis</f:facet>
+					<h:outputText value="#{arzt.praxis}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Vorname</f:facet>
+					<h:outputText value="#{arzt.vorname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nachname</f:facet>
+					<h:outputText value="#{arzt.nachname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Emailadresse</f:facet>
+					<h:outputText value="#{arzt.emailadresse}" >
+					<f:convertDateTime pattern="dd.MM.yyyy" type="date" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Passwort</f:facet>
+					<h:outputText value="#{arzt.passwort}" type="password" />
+				</h:column>
+			<h:column>
+					<f:facet name="header">Rolle</f:facet>
+					<h:outputText value="#{arzt.rolle}" />
+				</h:column>
+				<h:column>
+				<f:facet name="header">Bearbeiten</f:facet>
+				<h:form>	
+					<h:commandButton action="#{aerzteHandler.edit()}"
+						value="Bearbeiten" /> </h:form>
+				</h:column>
+		
+			
+				<h:column>
+				<f:facet name="header">Löschen</f:facet>
+				<h:form>
+					
+					<h:commandButton action="#{aerzteHandler.delete()}" value="Löschen" />
+					</h:form>
+				</h:column>
+			</h:dataTable>
+			<h:form>
+			<h:commandButton action="#{aerzteHandler.neu()}"
+						value="Neunen Arzt anlegen" />
+			</h:form>
+			</ui:insert>
+			</div>
+	<div id="footer">
+		<ui:insert name="footer"></ui:insert>
+	</div>
+</h:body>
+</html>

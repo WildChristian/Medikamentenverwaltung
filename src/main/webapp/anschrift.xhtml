@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel"> Medi Plattform</ui:insert>
+	</title>
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:dataTable var="anschrift"
+				value="#{kundenHandler.merkeKunde.anschriften}"
+				rowClasses="odd,even" headerClass="header">
+				<f:facet name="header">Kunden</f:facet>
+				<h:column>
+					<f:facet name="header">Straße, Hausnummer</f:facet>
+					<h:outputText value="#{anschrift.straße}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ort</f:facet>
+					<h:outputText value="#{anschrift.ort}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">PLZ</f:facet>
+					<h:outputText value="#{anschrift.postleitzahl}" />
+				</h:column>
+				
+			</h:dataTable>
+			<p>
+				<h:form>
+					<h:commandButton action="#{kundenHandler.neuanschrift()}"
+						value="Neuen Adresse anlegen" />
+				</h:form>
+			</p>
+
+
+
+			<h:form>
+				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+					<h:outputLabel value="Straße, Hausnummer:" for="straße" />
+					<h:panelGroup>
+						<h:inputText id="straße"
+							value="#{kundenHandler.merkeanschrift.straße}" />
+					</h:panelGroup>
+					<h:outputLabel value="PLZ:" for="plz" />
+					<h:panelGroup>
+						<h:inputText id="plz"
+							value="#{kundenHandler.merkeanschrift.postleitzahl}" />
+					</h:panelGroup>
+					<h:outputLabel value="Ort:" for="ort" />
+					<h:panelGroup>
+						<h:inputText id="ort" value="#{kundenHandler.merkeanschrift.ort}" />
+					</h:panelGroup>
+
+					<h:commandButton action="#{kundenHandler.speichernanschrift()}"
+						value="speichern" />
+				</h:panelGrid>
+			</h:form>
+
+			<h:form>
+				<h:link outcome="alleKunden" value="Hier gehts zurück. :-)" />
+			</h:form>
+		</ui:insert>
+	</div>
+
+	<div id="footer">
+		<ui:insert name="footer">
+		</ui:insert>
+	</div>
+</h:body>
+</html>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">Medikamentenverwaltung 1.0</ui:insert>
+	</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<f:event listener="#{bestellungHandler.init()}" type="preRenderView" />
+		<f:event listener="#{loginHandler.zugriff_arzt()}" type="preRenderView" />
+	
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+		<h1>Bestellungen</h1>
+			<h:dataTable var="bestellung" value="#{bestellungHandler.bestellung}"
+				rowClasses="odd,even" headerClass="header">
+				<f:facet name="header">Bestellung</f:facet>
+				<h:column>
+					<f:facet name="header">Bestellnummer</f:facet>
+					<h:outputText value="#{bestellung.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Datum</f:facet>
+					<h:outputText value="#{bestellung.date}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Kunde</f:facet>
+					<h:outputText value="#{bestellung.patient.nachname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Bestellsumme</f:facet>
+					<h:outputText value="#{bestellung.summe}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Bearbeiten und Medikamente einsehen</f:facet>
+					<h:form>
+						<h:commandButton action="#{bestellungHandler.edit()}"
+							value="Bearbeiten" />
+					</h:form>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Löschen</f:facet>
+					<h:form>
+						<h:commandButton action="#{bestellungHandler.delete()}"
+							value="Löschen" />
+					</h:form>
+				</h:column>
+			</h:dataTable>
+			<h:form>
+				<h:commandButton action="#{bestellungHandler.neu()}"
+					value="Neue Bestellung anlegen" />
+			</h:form>
+			
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer"></ui:insert>
+	</div>
+	
+	<h:link value="zurück" outcome="dashboard_apotheke" />
+</h:body>
+</html>

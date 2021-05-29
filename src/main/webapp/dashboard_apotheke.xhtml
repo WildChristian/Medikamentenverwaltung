@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">
+Kundenverwaltung 1.0
+</ui:insert></title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<f:event listener="#{loginHandler.zugriff_arzt()}" type="preRenderView" />
+
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+
+			<h1>Dashboard Apotheke</h1>
+			<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+				<h:button value="Alle Bestellungen einsehen"
+					outcome="alleBestellungen" />
+				<h:button value="Alle Medikamente einsehen"
+					outcome="alleMedikamente_apotheker" />
+
+				<h:form>
+					<h:commandButton action="#{kundenHandler.init_apotheke()}"
+						value="Alle Kunden einsehen" />
+				</h:form>
+			</h:panelGrid>
+
+
+			<br></br>
+			<h:form>
+				<h:commandButton action="#{loginHandler.logout()}" value="Logout" />
+			</h:form>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+		</ui:insert>
+	</div>
+</h:body>
+</html>
+

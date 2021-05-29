@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">Medikamenten- Und Rezeptenverwaltung 1.0</ui:insert>
+	</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+
+<h:body>
+  	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<f:event listener="#{personHandler.init()}" type="preRenderView" /> 
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+		<h1>Nutzerdaten</h1>
+			<h:dataTable var="person" value="#{personHandler.person}"
+				rowClasses="odd,even" headerClass="header">
+				
+				<h:column>
+					<f:facet name="header">Nutzernummer</f:facet>
+					<h:outputText value="#{person.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Vorname</f:facet>
+					<h:outputText value="#{person.vorname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nachname</f:facet>
+					<h:outputText value="#{person.nachname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Geburtsdatum</f:facet>
+				
+					<h:outputText value="#{person.geburtsdatum}" >
+						<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
+						</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Emailadresse</f:facet>
+					<h:outputText value="#{person.emailadresse}" />
+				</h:column>
+				 <h:column>
+					  <f:facet name="header">Anrede</f:facet>
+					<h:outputText value="#{person.anrede.label}" />
+				</h:column>  
+				<h:column>
+					<f:facet name="header">Rolle</f:facet>
+					<h:outputText value="#{person.rolle.label}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Bearbeiten</f:facet>
+					<h:form>
+						<h:commandButton action="#{personHandler.edit()}"
+							value="Bearbeiten" />
+					</h:form>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Anschrift</f:facet>
+					<h:form>
+
+						<h:commandButton action="#{personHandler.editanschrift()}"
+							value="Anschrift" />
+					</h:form>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Krankenkasse</f:facet>
+					<h:form>
+
+						<h:commandButton action="#{personHandler.editKrankenkasse()}"
+							value="Krankenkasse" />
+					</h:form>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Löschen</f:facet>
+					<h:form>
+
+						<h:commandButton action="#{personHandler.delete()}"
+							value="Löschen" />
+					</h:form>
+				</h:column>
+				
+			</h:dataTable>
+			<br></br>
+
+			<h:outputText>Nach Nachnamen filtern!</h:outputText>
+			<h:form>
+				<h:outputLabel value="Nachname:" for="von" />
+				<h:panelGroup>
+					<h:inputText id="von" value="#{personHandler.inputNachname}" />
+				</h:panelGroup>
+
+				<h:commandButton action="#{personHandler.inputvonFilter()}" style="margin:10px;" value="Filtern" />
+				<h:commandButton action="#{personHandler.resetfilter()}" style="margin:10px;" value="Filter löschen" />
+
+			</h:form>
+
+			
+			<p></p>
+			 <h:form>
+				<h:commandButton action="#{personHandler.neu()}" style="margin:10px;" value="Neuen Nutzer anlegen" />
+				
+				<h:commandButton action="Dashboard_Admin" style="margin:10px;" value=" Zurück zum Dashboard!" />
+			</h:form>
+			
+			
+			
+
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer"> Medikamentenverwaltung 2.0</ui:insert>	
+	</div>
+</h:body>
+</html>
+

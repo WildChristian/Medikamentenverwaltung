@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">
+Medi Plattform
+</ui:insert></title>
+
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h1>Registierungsformular</h1>
+			<h:form>
+				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+					<h:outputLabel value="Vorname:" for="vorname" />
+					<h:panelGroup>
+						<h:inputText id="vorname"
+							value="#{kundenHandler.merkeKunde.vorname}" />
+					</h:panelGroup>
+					<h:outputLabel value="Nachname:" for="nachname" />
+					<h:panelGroup>
+						<h:inputText id="nachname"
+							value="#{kundenHandler.merkeKunde.nachname}" required="true"
+							requiredMessage="Eingabe fehlt!" />
+						<h:message for="passwort" styleClass="message" />
+					</h:panelGroup>
+					<h:outputLabel value="Geburtsdatum:" for="geburtsdatum">
+
+					</h:outputLabel>
+					<h:panelGroup>
+						<h:inputText id="geburtsdatum"
+							value="#{kundenHandler.merkeKunde.geburtsdatum}"
+							placeholder="dd.MM.yyyy">
+							<f:convertDateTime pattern="dd.MM.yyyy" type="date" />
+						</h:inputText>
+					</h:panelGroup>
+					<h:outputLabel value="Anrede:" for="anrede" />
+					<h:panelGroup>
+						<h:selectOneMenu id="anrede"
+							value="#{kundenHandler.merkeKunde.anrede}">
+							<f:selectItems var="form" value="#{kundenHandler.anredeValues}"
+								itemValue="#{form}" itemLabel="#{form.label}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+
+					<h:outputLabel value="emailadresse:" for="emailadresse" />
+					<h:panelGroup>
+
+						<h:inputText id="emailadresse"
+							value="#{kundenHandler.merkeKunde.emailadresse}" required="true"
+							requiredMessage="Erfolderlisches Feld" />
+						<h:message for="passwort" styleClass="message" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Passwort:" for="passwort" />
+					<h:panelGroup>
+						<h:inputSecret id="passwort"
+							value="#{kundenHandler.merkeKunde.passwort}" required="true"
+							requiredMessage="Eingabe fehlt" />
+						<h:message for="passwort" styleClass="message" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Rolle:" for="rolle" />
+					<h:panelGroup>
+
+						<h:selectOneMenu id="rolle"
+							value="#{kundenHandler.merkeKunde.rolle}">
+							<f:selectItems var="form" value="#{kundenHandler.bestimmteRolle}"
+								itemValue="#{form}" itemLabel="#{form.label}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+
+			<h:outputLabel value="Ich habe die Datenschutzerklärung gelesen" for="datenschutz" />
+     				<h:panelGroup> 
+     				<h:selectBooleanCheckbox id="datenschutz" value="datenschutz" required="true" requiredMessage="Sie müssen die Datenschutzt akzeptieren"/>
+     				<h:message for="datenschutz" styleClass="message" /></h:panelGroup>
+					
+
+
+					
+
+					<h:commandButton action="#{kundenHandler.speichern()}"
+						value="speichern" />
+						
+     				<button class="button" onClick="window.open('datenschutz.xhtml');">
+						<span class="icon">Datenschutzerklärung lesen</span>
+					</button>
+				
+				</h:panelGrid>
+			</h:form>
+
+			<h:outputText value="#{kundenHandler.input_doubleAccount}" />
+		</ui:insert>
+	</div>
+
+	<h:link value="zurück" outcome="login" />
+	<div id="footer">
+		<ui:insert name="footer">
+		</ui:insert>
+	</div>
+
+</h:body>
+</html>
+

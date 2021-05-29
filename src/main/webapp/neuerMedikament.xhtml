@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<title><ui:insert name="titel"> Medi Plattform</ui:insert>
+	</title>
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+<h:body>
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:form>
+				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+					<h:outputLabel value="Medikamentenbezeichnung:" for="name" />
+					<h:panelGroup>
+						<h:inputText id="name"
+							value="#{medikamentHandler.merkeMedikament.medikamentenBezeichnung}" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Preis:" for="preis" />
+					<h:panelGroup>
+						<h:inputText id="preis"
+							value="#{medikamentHandler.merkeMedikament.preis}" />
+					</h:panelGroup>
+					
+					<h:outputLabel value="Menge:" for="menge" />
+					<h:panelGroup>
+						<h:inputText id="menge"
+							value="#{medikamentHandler.merkeMedikament.menge}" />
+					</h:panelGroup>
+
+					<h:outputLabel value="Rezeptpflichtig:" />
+					<h:panelGroup>
+
+						<h:selectOneMenu id="anrede"
+							value="#{medikamentHandler.merkeMedikament.rezeptPflichtig}">
+							<f:selectItems var="form"
+								value="#{medikamentHandler.rezeptpflichtigValues}"
+								itemValue="#{form}" itemLabel="#{form.label}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+
+				</h:panelGrid>
+				<h:commandButton action="#{medikamentHandler.speichern()}" value="Speichern" style="margin:10px;"/>
+				<h:commandButton action="#{medikamentHandler.abbrechen()}" value="Abbrechen" style="margin:10px;" />
+			</h:form>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+		</ui:insert>
+	</div>
+</h:body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel"> Medi Plattform</ui:insert>
+	</title>
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</h:head>
+
+<h:body>
+	<f:event listener="#{kundenHandler.noAdmin()}" type="preRenderView" />
+	<f:event listener="#{loginHandler.checkLoggedIn}" type="preRenderView" />
+	<f:event listener="#{kundenHandler.init_apotheke}" type="preRenderView" />
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+		<h1>Patientendaten</h1>
+			<h:dataTable var="kunde" value="#{kundenHandler.kunde}"
+				rowClasses="odd,even" headerClass="header">
+				<f:facet name="header"></f:facet>
+				
+				<h:column>
+					<f:facet name="header">Kundennummer</f:facet>
+					<h:outputText value="#{kunde.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Vorname</f:facet>
+					<h:outputText value="#{kunde.vorname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nachname</f:facet>
+					<h:outputText value="#{kunde.nachname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Anrede</f:facet>
+					<h:outputText value="#{kunde.anrede.label}" />
+				</h:column>
+
+			</h:dataTable>
+			<br></br>
+
+			<p>
+				<h:link outcome="dashboard_apotheke"> Zurück!</h:link>
+			</p>
+
+
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer"></ui:insert>
+	</div>
+</h:body>
+</html>
+

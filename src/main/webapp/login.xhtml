@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titel">Medi Plattform</ui:insert></title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="icon" href="medi-logo.png" type="image/x-icon"></link>
+
+</h:head>
+<h:body>
+	<f:event listener="#{kundenHandler.noAdmin()}" type="preRenderView" />
+
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="header">
+
+			<h1>Anmeldung</h1>
+
+			<h:form>
+				<h:panelGrid id="grid" columns="2" headerClass="header">
+
+					<h:panelGroup>
+						<h:outputLabel value="Emailadresse" for="emailadresse" />
+						<h:message for="emailadresse" styleClass="message" />
+
+						<h:inputText id="emailadresse" required="true"
+							value="#{loginHandler.emailadresse}"
+							requiredMessage="Eingabe fehlt!" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<h:outputLabel value="Passwort:" for="apasswort" />
+						<h:message for="passwort" styleClass="message" />
+
+						<h:inputSecret id="passwort" value="#{loginHandler.passwort}"
+							required="true" requiredMessage="Eingabe fehlt!" />
+
+					</h:panelGroup>
+					<h:panelGroup />
+
+
+					<h:commandButton action="#{loginHandler.login()}" value="Login" />
+				</h:panelGrid>
+			</h:form>
+			<h:form>
+				<h:commandButton action="#{kundenHandler.registrieren()}"
+					value="Registrieren" />
+			</h:form>
+		
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer"></ui:insert>
+	</div>
+</h:body>
+</html>
+
